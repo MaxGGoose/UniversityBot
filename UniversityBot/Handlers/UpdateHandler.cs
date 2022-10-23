@@ -16,9 +16,12 @@ public class UpdateHandler : IUpdateHandler
         var message = update.Message;
 
         Console.WriteLine($"Received a '{message.Text}' in chat with @{message.From!.Username}");
-        
-        //TODO: Create commands itself
 
+        CommandHandler commandHandler = new(tgBotClient, cancellationToken);
+
+        var command = commandHandler.GetCommand(message);
+        command?.Invoke();
+        
         return Task.CompletedTask;
     }
     
