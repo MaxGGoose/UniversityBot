@@ -4,9 +4,9 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace UniversityBot.TelegramHandlers;
+namespace UniversityBot.Handlers;
 
-public sealed class UpdateHandler : IUpdateHandler
+public class UpdateHandler : IUpdateHandler
 {
     public Task HandleUpdateAsync(ITelegramBotClient tgBotClient, Update update, CancellationToken cancellationToken)
     {
