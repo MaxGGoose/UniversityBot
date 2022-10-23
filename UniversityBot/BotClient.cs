@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
-using UniversityBot.TelegramHandlers;
+using UniversityBot.Handlers;
 
 namespace UniversityBot;
 
@@ -9,11 +9,9 @@ public class BotClient
     private readonly TelegramBotClient _tgBotClient;
     private readonly CancellationTokenSource _cancellationTokenSource;
 
-    public required string TgBotToken { private get; init; }
-    
-    public BotClient()
+    public BotClient(string tgBotToken)
     {
-        _tgBotClient = new TelegramBotClient(TgBotToken!);
+        _tgBotClient = new TelegramBotClient(tgBotToken!);
         _cancellationTokenSource = new CancellationTokenSource();
     }
     
