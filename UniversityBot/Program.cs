@@ -1,3 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using UniversityBot;
 
-Console.WriteLine("Hello, World!");
+var tgBotClient = new BotClient(Environment.GetEnvironmentVariable("BOT_TOKEN")!);
+
+var user = tgBotClient.StartBot().Result;
+
+Console.WriteLine($"Start listening for @{user.Username}");
+Console.ReadKey();
+
+tgBotClient.StopBot();
