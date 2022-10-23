@@ -1,10 +1,12 @@
 ﻿using Telegram.Bot;
+using Telegram.Bot.Exceptions;
+using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 namespace UniversityBot.TelegramHandlers;
 
-public sealed class UpdateHandler
+public sealed class UpdateHandler : IUpdateHandler
 {
     public Task HandleUpdateAsync(ITelegramBotClient tgBotClient, Update update, CancellationToken cancellationToken)
     {
@@ -18,6 +20,20 @@ public sealed class UpdateHandler
         //TODO: Create commands itself
 
         return Task.CompletedTask;
+    }
+    
+    public Task HandlePollingErrorAsync(ITelegramBotClient tgBotClient, Exception exception, CancellationToken cancellationToken)
+    {
+        var errorMessage = exception switch
+        {
+            ApiRequestException apiRequestException
+                => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]" +
+                   $"\n{apiRequestException.Message}",
+            _ => exception.ToString()
+        };
 
+        Console.WriteLine(errorMessage);
+        
+        return Task.CompletedTask;
     }
 }
