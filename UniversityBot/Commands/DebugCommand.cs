@@ -1,11 +1,8 @@
-﻿using Telegram.Bot;
-using Telegram.Bot.Types;
-
-namespace UniversityBot.Commands;
+﻿namespace UniversityBot.Commands;
 
 public class DebugCommand : ICommand
 {
-    public Task<Action?> Command(ITelegramBotClient tgBotClient, Message message, CancellationToken cancellationToken)
+    public Task<Action> Command(ITelegramBotClient tgBotClient, Message message, CancellationToken cancellationToken)
     {
         async void Action() => 
             await tgBotClient.SendTextMessageAsync(

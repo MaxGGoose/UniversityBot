@@ -1,6 +1,4 @@
-﻿using Telegram.Bot;
-using Telegram.Bot.Types;
-using UniversityBot.Handlers;
+﻿using UniversityBot.Handlers;
 
 namespace UniversityBot;
 
