@@ -9,7 +9,7 @@ public static class LinkCatcher
         var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
         var page = await browser.NewPageAsync();
         
-        await page.GoToAsync("https://kosygin-rgu.ru/1apprgu/rguschedule/indexClassSchedule.aspx");
+        await page.GoToAsync(Environment.GetEnvironmentVariable("LINK_TO_UNIVERSITY_SITE"));
 
         var links = page.XPathAsync("//*[@class=\"panel-body\"]//tr/td[1]/a").Result
             .Select(el => el
