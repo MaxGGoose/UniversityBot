@@ -1,6 +1,6 @@
 ﻿using File = System.IO.File;
 
-namespace UniversityBot;
+namespace ScheduleFilesDownloader;
 
 public static class FileDownloader
 {

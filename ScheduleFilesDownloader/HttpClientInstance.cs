@@ -1,4 +1,4 @@
-﻿namespace UniversityBot;
+﻿namespace ScheduleFilesDownloader;
 
 public static class HttpClientInstance
 {
