@@ -22,9 +22,9 @@ public class ScheduleFilesRenewer
                 .Last())
             .ToArray();
 
-        if (currentScheduleFilenames.SequenceEqual(newScheduleFilenames)) return false;
+        if (currentScheduleFilenames.Order().SequenceEqual(newScheduleFilenames.Order())) return false;
 
-        var linksToFilesNeedToUpdate = linksToNewFiles.ExceptBy(currentScheduleFilenames, s => s?.Split().Last());
+        var linksToFilesNeedToUpdate = linksToNewFiles.ExceptBy(currentScheduleFilenames, s => s?.Split('/').Last());
 
         foreach (var link in linksToFilesNeedToUpdate)
         {
