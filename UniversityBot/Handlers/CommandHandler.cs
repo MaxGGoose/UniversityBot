@@ -22,10 +22,8 @@ public class CommandHandler
 
     public Action? GetCommand(Message? message)
     {
-        _currentMessage = message;
-
-        return _currentMessage?.Text is not null && _commands.TryGetValue(_currentMessage.Text, out var command)
-            ? command.Command(_tgBotClient, _currentMessage, _cancellationToken).Result
-            : null;
+        return message?.Text is not null && _commands.TryGetValue(message.Text, out var command)
+            ? command.Command(_tgBotClient, message, _cancellationToken).Result
+            : DefaultCommand.Command(_tgBotClient, message, _cancellationToken).Result;
     }
 }
