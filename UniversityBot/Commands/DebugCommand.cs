@@ -2,7 +2,7 @@
 
 public class DebugCommand : ICommand
 {
-    public Task<Action> Command(ITelegramBotClient tgBotClient, Message message, CancellationToken cancellationToken)
+    public Task<Action> Command(ITelegramBotClient tgBotClient, Message message, CancellationToken cancellationToken, IsAnswerRequested isAnswerRequsted)
     {
         async void Action() => 
             await tgBotClient.SendTextMessageAsync(
