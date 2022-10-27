@@ -8,8 +8,6 @@ public class CommandHandler
     private readonly Dictionary<string, ICommand> _commands;
     private readonly CancellationToken _cancellationToken;
     
-    private Message? _currentMessage;
-
     public CommandHandler(ITelegramBotClient tgBotClient, CancellationToken cancellationToken)
     {
         _tgBotClient = tgBotClient;
