@@ -2,7 +2,7 @@
 
 namespace ScheduleFilesDownloader;
 
-public static class LinkCatcher
+internal static class LinkCatcher
 {
     public static async Task<IEnumerable<string?>> Catch()
     {

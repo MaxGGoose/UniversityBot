@@ -1,6 +1,6 @@
 ﻿namespace ScheduleFilesDownloader;
 
-public static class HttpClientInstance
+internal static class HttpClientInstance
 {
     private static HttpClient? _instance;
 

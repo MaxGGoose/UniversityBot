@@ -2,7 +2,7 @@
 
 namespace ScheduleFilesDownloader;
 
-public static class FileDownloader
+internal static class FileDownloader
 {
     public static async Task Download(string linkToFile)
     {

@@ -1,4 +1,6 @@
-﻿public static class DefaultCommand
+﻿namespace UniversityBot.Commands;
+
+public static class DefaultCommand
 {
     public static Task<Action> Command(ITelegramBotClient tgBotClient, Message message, CancellationToken cancellationToken)
     {
