@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityBot", "University
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleFilesDownloader", "ScheduleFilesDownloader\ScheduleFilesDownloader.csproj", "{ACD9F604-AE78-4B99-909F-7D71357E89DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelFileDivider", "ExcelFileDivider\ExcelFileDivider.csproj", "{76721217-BA2D-43D7-B664-795B0896850A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{ACD9F604-AE78-4B99-909F-7D71357E89DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACD9F604-AE78-4B99-909F-7D71357E89DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACD9F604-AE78-4B99-909F-7D71357E89DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76721217-BA2D-43D7-B664-795B0896850A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76721217-BA2D-43D7-B664-795B0896850A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76721217-BA2D-43D7-B664-795B0896850A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76721217-BA2D-43D7-B664-795B0896850A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
