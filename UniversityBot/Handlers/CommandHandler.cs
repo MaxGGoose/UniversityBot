@@ -8,7 +8,7 @@ public class CommandHandler
     private readonly Dictionary<string, ICommand> _commands;
     private readonly CancellationToken _cancellationToken;
     
-    private static IsAnswerRequested _isAnswerRequsted = new() { IsRequested = false, RequestCommand = string.Empty };
+    private readonly AnswerRequest _answerRequest;
 
     public CommandHandler(ITelegramBotClient tgBotClient, CancellationToken cancellationToken)
     {

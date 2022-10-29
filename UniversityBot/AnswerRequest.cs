@@ -1,6 +1,6 @@
 ﻿namespace UniversityBot;
 
-public class IsAnswerRequested
+public class AnswerRequest
 {
     public required bool IsRequested;
     public required string? RequestCommand;
