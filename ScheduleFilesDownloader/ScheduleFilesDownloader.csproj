@@ -10,4 +10,8 @@
       <PackageReference Include="PuppeteerSharp" Version="8.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ExcelFileDivider\ExcelFileDivider.csproj" />
+    </ItemGroup>
+
 </Project>
