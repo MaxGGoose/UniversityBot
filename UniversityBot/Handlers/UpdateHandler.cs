@@ -6,18 +6,21 @@ namespace UniversityBot.Handlers;
 
 public class UpdateHandler : IUpdateHandler
 {
+    private static readonly CommandHandler CommandHandler = new();
+    
     public Task HandleUpdateAsync(ITelegramBotClient tgBotClient, Update update, CancellationToken cancellationToken)
     {
         if (update.Type != UpdateType.Message) return Task.CompletedTask;
+        if (update.Message?.Text is null) return Task.CompletedTask;
         if (update.Message!.Type != MessageType.Text) return Task.CompletedTask;
         
         var message = update.Message;
 
         Console.WriteLine($"Received a '{message.Text}' in chat with @{message.From!.Username}");
 
-        CommandHandler commandHandler = new(tgBotClient, cancellationToken);
-
-        var command = commandHandler.GetCommand(message);
+        CommandHandler.SetCommandHandler(tgBotClient, cancellationToken);
+        
+        var command = CommandHandler.GetCommand(message);
         command?.Invoke();
         
         return Task.CompletedTask;
