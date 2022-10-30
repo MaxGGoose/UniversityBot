@@ -5,8 +5,7 @@ namespace UniversityBot.Commands;
 
 public class RenewCommand : ICommand
 {
-    public Task<Action> Command(ITelegramBotClient tgBotClient, Message message, CancellationToken cancellationToken,
-        IsAnswerRequested isAnswerRequsted)
+    public Task<Action> Command(ITelegramBotClient tgBotClient, Message message, CancellationToken cancellationToken, AnswerRequest answerRequest)
     {
         async void Action()
         {
@@ -23,8 +22,7 @@ public class RenewCommand : ICommand
             {
                 answer = "Недостаточно прав для использования этой команды";
             }
-            
-            
+
             await tgBotClient.SendTextMessageAsync(
                 chatId: message.Chat.Id,
                 text: answer,
