@@ -4,29 +4,42 @@ namespace UniversityBot.Handlers;
 
 public class CommandHandler
 {
-    private readonly ITelegramBotClient _tgBotClient;
     private readonly Dictionary<string, ICommand> _commands;
-    private readonly CancellationToken _cancellationToken;
-    
-    private readonly AnswerRequest _answerRequest;
 
-    public CommandHandler(ITelegramBotClient tgBotClient, CancellationToken cancellationToken)
+    private CancellationToken _cancellationToken;
+    private ITelegramBotClient _tgBotClient;
+    private AnswerRequest _answerRequest;
+
+    public CommandHandler()
     {
-        _tgBotClient = tgBotClient;
-        _cancellationToken = cancellationToken;
+        
         _commands = new Dictionary<string, ICommand>
         {
-            {"/debugcommand", new DebugCommand()}
+            {"/getschedule", new GetScheduleCommand()},
+            {"/renew", new RenewCommand()},
+        };
+        _answerRequest = new AnswerRequest
+        {
+            IsRequested = false,
+            RequestCommand = string.Empty
         };
     }
 
-    public Action? GetCommand(Message? message)
+    public void SetCommandHandler(ITelegramBotClient tgBotClient, CancellationToken cancellationToken)
     {
-        
-        if (!_isAnswerRequsted.IsRequested)
-            return message?.Text is not null && _commands.TryGetValue(message.Text, out var command)
-                ? command.Command(_tgBotClient, message, _cancellationToken, _isAnswerRequsted).Result
+        _tgBotClient = tgBotClient;
+        _cancellationToken = cancellationToken;
+    }
+
+    public Action GetCommand(Message message)
+    {
+        var answerRequestIsRequested = _answerRequest.IsRequested;
+        var b = _answerRequest.RequestCommand is not null;
+        var tryGetValue = _commands.TryGetValue(_answerRequest.RequestCommand, out var command);
+        return answerRequestIsRequested && b && tryGetValue
+            ? command.Command(_tgBotClient, message, _cancellationToken, _answerRequest).Result
+            : message.Text is not null && _commands.TryGetValue(message.Text, out command)
+                ? command.Command(_tgBotClient, message, _cancellationToken, _answerRequest).Result
                 : DefaultCommand.Command(_tgBotClient, message, _cancellationToken).Result;
-        return _commands[_isAnswerRequsted.RequestCommand].Command(_tgBotClient, message, _cancellationToken, _isAnswerRequsted).Result;
     }
 }
