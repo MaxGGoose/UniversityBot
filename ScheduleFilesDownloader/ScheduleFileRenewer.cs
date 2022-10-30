@@ -4,8 +4,11 @@ public class ScheduleFilesRenewer
 {
     public static async Task<bool> Renew()
     {
-        if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\schedule_files"))
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\schedule_files");
+        var currentDirectoryPath = Directory.GetCurrentDirectory();
+        var rawScheduleDirectory = Environment.GetEnvironmentVariable("RAW_SCHEDULE_DIRECTORY");
+        
+        if (!Directory.Exists(currentDirectoryPath + $@"\{rawScheduleDirectory}"))
+            Directory.CreateDirectory(currentDirectoryPath + $@"\{rawScheduleDirectory}");
         
         var linksToNewFiles = LinkCatcher
             .Catch().Result
@@ -16,7 +19,7 @@ public class ScheduleFilesRenewer
                 .Last())
             .ToArray();
         var currentScheduleFilenames = Directory
-            .GetFiles(Directory.GetCurrentDirectory() + @"\schedule_files")
+            .GetFiles(currentDirectoryPath + $@"\{rawScheduleDirectory}")
             .Select(filename => filename
                 .Split('\\')
                 .Last())
@@ -24,13 +27,15 @@ public class ScheduleFilesRenewer
 
         if (currentScheduleFilenames.Order().SequenceEqual(newScheduleFilenames.Order())) return false;
 
-        var linksToFilesNeedToUpdate = linksToNewFiles.ExceptBy(currentScheduleFilenames, s => s?.Split('/').Last());
+        var linksToFilesNeedToUpdate = linksToNewFiles.ExceptBy(currentScheduleFilenames, s => s?.Split('/').Last()).ToList();
 
         foreach (var link in linksToFilesNeedToUpdate)
         {
-            File.Delete(Directory.GetCurrentDirectory() + @"\schedule_files" + $@"\{link?.Split('/').Last()}");
+            File.Delete(currentDirectoryPath + $@"\{rawScheduleDirectory}" + $@"\{link?.Split('/').Last()}");
             if (link != null) await FileDownloader.Download(link);
         }
+        
+        ExcelFileDivider.ExcelFileDivider.Divide(linksToFilesNeedToUpdate.Select(link => link!.Split('/').Last()));
         
         return true;
     }
