@@ -5,6 +5,8 @@ namespace UniversityBot.Commands;
 
 public class GetScheduleCommand : ICommand
 {
+    public string CommandText => "/getschedule";
+
     public Task<Action> Command(ITelegramBotClient tgBotClient, Message message, CancellationToken cancellationToken, AnswerRequest answerRequest)
     {
         async void Action()
@@ -19,7 +21,7 @@ public class GetScheduleCommand : ICommand
                               "Пока что бот не очень умный, поэтому он не поймет, если вы напишете мпм121, ДГ-122В, или кдк11-721",
                         cancellationToken: cancellationToken);
                     answerRequest.StageOfDialog = 1;
-                    answerRequest.RequestCommand = message.Text;
+                    answerRequest.RequestCommand = CommandText;
                     break;
                 case 1:
                     var filePath = Directory.GetCurrentDirectory()

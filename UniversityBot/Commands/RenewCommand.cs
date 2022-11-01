@@ -5,6 +5,8 @@ namespace UniversityBot.Commands;
 
 public class RenewCommand : ICommand
 {
+    public string CommandText => "/renew";
+
     public Task<Action> Command(ITelegramBotClient tgBotClient, Message message, CancellationToken cancellationToken, AnswerRequest answerRequest)
     {
         async void Action()
