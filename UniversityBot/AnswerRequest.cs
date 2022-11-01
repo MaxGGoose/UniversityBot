@@ -2,6 +2,6 @@
 
 public class AnswerRequest
 {
-    public required bool IsRequested;
+    public required int StageOfDialog;
     public required string? RequestCommand;
 }

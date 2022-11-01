@@ -19,7 +19,7 @@ public class CommandHandler
         };
         _answerRequest = new AnswerRequest
         {
-            IsRequested = false,
+            StageOfDialog = 0,
             RequestCommand = string.Empty
         };
     }
@@ -32,7 +32,7 @@ public class CommandHandler
 
     public Action GetCommand(Message message)
     {
-        return _answerRequest.IsRequested && _answerRequest.RequestCommand is not null && _commands.TryGetValue(_answerRequest.RequestCommand!, out var command)
+        return _answerRequest.StageOfDialog != 0 && _answerRequest.RequestCommand is not null && _commands.TryGetValue(_answerRequest.RequestCommand!, out var command)
             ? command.Command(_tgBotClient, message, _cancellationToken, _answerRequest).Result
             : message.Text is not null && _commands.TryGetValue(message.Text, out command)
                 ? command.Command(_tgBotClient, message, _cancellationToken, _answerRequest).Result
