@@ -12,7 +12,6 @@ public class CommandHandler
 
     public CommandHandler()
     {
-        
         _commands = new Dictionary<string, ICommand>
         {
             {"/getschedule", new GetScheduleCommand()},
@@ -33,10 +32,7 @@ public class CommandHandler
 
     public Action GetCommand(Message message)
     {
-        var answerRequestIsRequested = _answerRequest.IsRequested;
-        var b = _answerRequest.RequestCommand is not null;
-        var tryGetValue = _commands.TryGetValue(_answerRequest.RequestCommand, out var command);
-        return answerRequestIsRequested && b && tryGetValue
+        return _answerRequest.IsRequested && _answerRequest.RequestCommand is not null && _commands.TryGetValue(_answerRequest.RequestCommand!, out var command)
             ? command.Command(_tgBotClient, message, _cancellationToken, _answerRequest).Result
             : message.Text is not null && _commands.TryGetValue(message.Text, out command)
                 ? command.Command(_tgBotClient, message, _cancellationToken, _answerRequest).Result
