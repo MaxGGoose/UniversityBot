@@ -6,9 +6,13 @@ public class ScheduleFilesRenewer
     {
         var currentDirectoryPath = Directory.GetCurrentDirectory();
         var rawScheduleDirectory = Environment.GetEnvironmentVariable("RAW_SCHEDULE_DIRECTORY");
+        var dividedScheduleDirectory = Environment.GetEnvironmentVariable("DIVIDED_SCHEDULE_DIRECTORY");
         
         if (!Directory.Exists(currentDirectoryPath + $@"\{rawScheduleDirectory}"))
             Directory.CreateDirectory(currentDirectoryPath + $@"\{rawScheduleDirectory}");
+        
+        if (!Directory.Exists(currentDirectoryPath + $@"\{dividedScheduleDirectory}"))
+            Directory.CreateDirectory(currentDirectoryPath + $@"\{dividedScheduleDirectory}");
         
         var linksToNewFiles = LinkCatcher
             .Catch().Result

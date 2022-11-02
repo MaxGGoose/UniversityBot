@@ -9,7 +9,7 @@ internal static class FileDownloader
         var httpResult = await HttpClientInstance.GetInstance().GetAsync(linkToFile);
 
         await using var resultStream = await httpResult.Content.ReadAsStreamAsync();
-        await using var fileStream = File.Create(Directory.GetCurrentDirectory() + $@"\schedule_files\{linkToFile.Split("/").Last()}");
+        await using var fileStream = File.Create(Directory.GetCurrentDirectory() + $@"\{Environment.GetEnvironmentVariable("RAW_SCHEDULE_DIRECTORY")}\{linkToFile.Split("/").Last()}");
         
         await resultStream.CopyToAsync(fileStream);
     }

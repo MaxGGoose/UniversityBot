@@ -15,10 +15,11 @@ public static class ExcelFileDivider
         foreach (var excelFilename in excelFilenames)
         {
             var path = $@"{currentDirectoryPath}\{rawScheduleDirectoryPath}\{excelFilename}";
+            var xls = false;
             
             if (excelFilename.Split('.').Last() == "xls")
             {
-                
+                xls = true;
                 path = $@"\{rawScheduleDirectoryPath}\new{excelFilename.Replace("xls", "xlsx")}";
                 ConverterXlsToXlsx.ConvertToXlsxFile(
                     currentDirectoryPath + $@"\{rawScheduleDirectoryPath}\{excelFilename}", 
@@ -43,6 +44,8 @@ public static class ExcelFileDivider
                 newPackage.Workbook.Worksheets.Add(groupName, worksheet);
                 newPackage.Save();
             }
+
+            if (xls) File.Delete(currentDirectoryPath + path);
         }
     }
 }
